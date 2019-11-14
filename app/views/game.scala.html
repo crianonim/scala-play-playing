@@ -1,0 +1,13 @@
+@(show:(String,String,Vector[String]))
+
+@main("Welcome to Play") {
+  <h1>Game</h1>
+    <h2>@show._1</h2>
+  <h2>@show._2</h2>
+  <h3>Choose:</h3>
+  <ul>
+    @for(option <- show._3) {
+        <li>@option</li>
+      }
+  </ul>
+}
