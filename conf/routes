@@ -8,6 +8,7 @@ GET     /                           controllers.HomeController.index
 GET     /startGame                  controllers.HomeController.startGame(scenario:String)
 GET     /show                       controllers.HomeController.show(game:String)
 GET     /playOption                 controllers.HomeController.playOption(game:String,option:String)
+GET     /game_option                controllers.HomeController.game_option(game:String,option:String)
 
 GET     /game_show                       controllers.HomeController.game_show(game:String)
 

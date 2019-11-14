@@ -86,3 +86,8 @@ WARN  code navigation does not work for the file '/home/criamon/tmp/play/moj-pla
 WARN  code navigation does not work for the file '/home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala' because it doesn't belong to a build target.
 WARN  code navigation does not work for the file '/home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala' because it doesn't belong to a build target.
 WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
+WARN  code navigation does not work for the file '/home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala' because it doesn't belong to a build target.
+WARN  code navigation does not work for the file '/home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala' because it doesn't belong to a build target.
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala

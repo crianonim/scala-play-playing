@@ -1,4 +1,4 @@
-@(show:(String,String,Vector[String]))
+@(show:(String,String,Vector[String]),gameId:String)
 
 @main("Welcome to Play") {
   <h1>Game</h1>
@@ -6,8 +6,8 @@
   <h2>@show._2</h2>
   <h3>Choose:</h3>
   <ul>
-    @for(option <- show._3) {
-        <li>@option</li>
+    @for((option,id) <- show._3.zipWithIndex) {
+        <li><a href=@("/game_option?game="+(gameId)+"&option="+(id+1))>@option</a></li>
       }
   </ul>
 }
