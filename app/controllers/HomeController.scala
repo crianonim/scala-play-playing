@@ -80,6 +80,13 @@ class HomeController @Inject()(cc: ControllerComponents)
         playthrough.play(option.toInt)
         Ok(views.html.game(playthrough.show(),gameId))
       }
-
+  }
+  def game()= Action {
+    implicit request: Request[AnyContent] =>
+      {
+        val gameId=gs.startGame(0)
+        val playthrough=gs.getGame(gameId)
+        Ok(views.html.game(playthrough.show(),gameId+""))
+      }
   }
 }
