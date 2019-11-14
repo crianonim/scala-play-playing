@@ -48,12 +48,11 @@ class HomeController @Inject()(cc: ControllerComponents)
       }
 
   }
-  def show(scenario_id: String) = Action {
+  def show(gameId: String) = Action {
     implicit request: Request[AnyContent] =>
       {
-        println("SID", scenario_id)
-        val gameId=gs.startGame(scenario_id.toInt)
-        Ok("GameId"+gameId)
+        val playthrough=gs.getGame(gameId.toInt)
+        Ok("Game"+playthrough.show())
       }
 
   }
