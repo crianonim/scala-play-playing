@@ -1,0 +1,10 @@
+INFO  time: initialize in 1.89s
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
+INFO  no build target: using presentation compiler with only scala-library
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
+INFO  shutting down Metals
+INFO  time: initialize in 2.08s
+INFO  skipping build import with status 'Requested'
+WARN  no build target: /home/criamon/tmp/play/moj-play/app/controllers/HomeController.scala
