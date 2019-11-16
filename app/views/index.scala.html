@@ -1,10 +1,17 @@
-@(scenarios:List[(Int,String)])
+@(scenarios:List[(Int,String)],games:List[(Int,String)])
 
 @main("Welcome to Play") {
-  <h1>Welcome to Play!</h1>
+  <h1>Welcome to Choose your own adventure!</h1>
+  <h2>Start a new game with one of the scenarios:</h2>
   <ul>
     @for( (id,title)<-scenarios){
       <li><a href=@("/game?scenario="+id)>@id</a> <span>@title</span></li>
+    }
+  </ul>
+  <h2>Continue started game:</h2>
+  <ul>
+    @for( (id,title)<-games){
+      <li><a href=@("/game_show?game="+id)>@id</a> <span>@title</span></li>
     }
   </ul>
 }

@@ -42,8 +42,9 @@ class HomeController @Inject()(cc: ControllerComponents)
     {
       println("REQUEST:", request)
       val scenarios=gs.getScenarios()
+      val playthroughs=gs.getStartedGames()
       // println(p1)
-      Ok(views.html.index(scenarios))
+      Ok(views.html.index(scenarios,playthroughs))
     }
   }
   def startGame(scenario_id: String) = Action {
