@@ -101,7 +101,7 @@ class HomeController @Inject()(cc: ControllerComponents)
       {
         println("SID", scenario_id)
         val gameId = gs.startGame(scenario_id.toInt)
-        respondWithJSON(mapToJSON(Map("game_id" -> gameId)))
+        respondWithJSON(mapToJSON(Map("game_id" -> gameId))).enableCors
       }
 
   }
@@ -113,7 +113,7 @@ class HomeController @Inject()(cc: ControllerComponents)
           case (head, intro, options) =>
             Map("head" -> head, "intro" -> intro, "options" -> options)
         }
-        respondWithJSON(mapToJSON(response))
+        respondWithJSON(mapToJSON(response)).enableCors
       }
 
   }
@@ -148,7 +148,7 @@ class HomeController @Inject()(cc: ControllerComponents)
           case (head, intro, options) =>
             Map("head" -> head, "intro" -> intro, "options" -> options)
         }
-        respondWithJSON(mapToJSON(response))
+        respondWithJSON(mapToJSON(response)).enableCors
       }
   }
 
