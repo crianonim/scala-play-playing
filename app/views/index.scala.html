@@ -1,5 +1,10 @@
-@()
+@(scenarios:List[(Int,String)])
 
 @main("Welcome to Play") {
   <h1>Welcome to Play!</h1>
+  <ul>
+    @for( (id,title)<-scenarios){
+      <li><a href=@("/game?scenario="+id)>@id</a> <span>@title</span></li>
+    }
+  </ul>
 }
