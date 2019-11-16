@@ -72,30 +72,8 @@ class HomeController @Inject()(cc: ControllerComponents)
       Ok(views.html.index(scenarios, playthroughs))
     }
   }
-  def startGame(scenario_id: String) = Action {
-    implicit request: Request[AnyContent] =>
-      {
-        println("SID", scenario_id)
-        val gameId = gs.startGame(scenario_id.toInt)
-        Ok("GameId" + gameId)
-      }
-
-  }
-  def show(gameId: String) = Action { implicit request: Request[AnyContent] =>
-    {
-      val playthrough = gs.getGame(gameId.toInt)
-      Ok("Game" + playthrough.show())
-    }
-
-  }
-  def playOption(gameId: String, option: String) = Action {
-    implicit request: Request[AnyContent] =>
-      {
-        val playthrough = gs.getGame(gameId.toInt)
-        playthrough.play(option.toInt)
-        Ok("Game" + playthrough.show())
-      }
-  }
+ 
+  
 
   def APIstartGame(scenario_id: String) = Action {
     implicit request: Request[AnyContent] =>
@@ -116,6 +94,12 @@ class HomeController @Inject()(cc: ControllerComponents)
         respondWithJSON(mapToJSON(response))
       }
 
+  }
+  def APIgetGames() = Action {
+    implicit request: Request[AnyContent] =>
+      {
+        respondWithJSON(mapToJSON(gs.getStartedGames().map(pair=>(pair._1+"",pair._2)).toMap))
+      }
   }
   def APIplayOption(gameId: String, option: String) = Action {
     implicit request: Request[AnyContent] =>
