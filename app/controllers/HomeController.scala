@@ -14,7 +14,7 @@ import site.jans.game._
 class HomeController @Inject()(cc: ControllerComponents)
     extends AbstractController(cc) {
   val operators = MathOperators.operators ++ LogicOperators.operators ++ BasicOperators.operators
-  val initialCtx = Map("dialog" -> "start", "turn" -> "1")
+  val initialCtx = Map("dialog" -> "start", "turn" -> "1", "name"->"Jasiu")
   val s1 = Scenario(
     "pierwszy scenariusz",
     Scenario.readScenarioFile("scenario.txt"),

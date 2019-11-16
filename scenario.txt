@@ -1,5 +1,5 @@
 #start
-You wake up in your bed. Your head hurts
+You are #{name} wake up in your bed. Your head hurts
 - Stand up [] #room
 - Lie in [] #bed
 
