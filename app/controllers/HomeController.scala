@@ -131,8 +131,11 @@ class HomeController @Inject()(cc: ControllerComponents)
   def APIgetScenarios() = Action { implicit request: Request[AnyContent] =>
     {
       respondWithJSON(
-        mapToJSON(gs.getScenarios().map(pair => (pair._1 + "", pair._2)).toMap)
-      )
+        mapToJSON(
+          Map("scenarios"->gs.getScenarios().map(pair => Map("id"->pair._1 , "scenarioTitle"->pair._2)))
+        )
+        // mapToJSON(gs.getScenarios().map(pair => (pair._1 + "", pair._2)).toMap)
+      ).enableCors
     }
   }
   def APIplayOption(gameId: String, option: String) = Action {
