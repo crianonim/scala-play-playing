@@ -43,16 +43,14 @@ class HomeController @Inject()(cc: ControllerComponents)
     val result = (for {
       (k, v) <- m
       val str = s""" "${k}": ${wrap(v)} """
-      // val str = v match {
-      //   case x: Int => s""" "${k}": ${x}"""
-      //   case x: Vector[String] => s""" "${k}":   ${x.mkString("[",",","]")} """
-      //   case x      => s""" "${k}": "${x}" """
-      // }
+     
     } yield str)
-    // println(result.mkString(","))
     "{\n" + result.mkString(", ") + "\n}"
   }
 
+  def respondWithJSON(s:String)= {
+    Result(ResponseHeader(200,Map.empty[String,String]),HttpEntity.Strict(ByteString(s),Some("application/json")))
+  }
   /**
     * Create an Action to render an HTML page.
     *
@@ -104,7 +102,7 @@ class HomeController @Inject()(cc: ControllerComponents)
       {
         println("SID", scenario_id)
         val gameId = gs.startGame(scenario_id.toInt)
-        Ok(mapToJSON(Map("game_id"->gameId)))
+        respondWithJSON(mapToJSON(Map("game_id"->gameId)))
       }
 
   }
@@ -115,8 +113,7 @@ class HomeController @Inject()(cc: ControllerComponents)
         val response=playthrough.show() match {
           case (head,intro,options)=>Map("head"->head,"intro"->intro,"options"->options)
         }
-        Result(ResponseHeader(200,Map.empty[String,String]),HttpEntity.Strict(ByteString(mapToJSON(response)),Some("application/json")))
-        // Ok(mapToJSON(response))
+        respondWithJSON(mapToJSON(response))
       }
 
   }
@@ -125,7 +122,11 @@ class HomeController @Inject()(cc: ControllerComponents)
       {
         val playthrough = gs.getGame(gameId.toInt)
         playthrough.play(option.toInt)
-        Ok("Game" + playthrough.show())
+
+         val response=playthrough.show() match {
+          case (head,intro,options)=>Map("head"->head,"intro"->intro,"options"->options)
+        }
+        respondWithJSON(mapToJSON(response))
       }
   }
 
