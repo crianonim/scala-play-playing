@@ -27,9 +27,21 @@ class HomeController @Inject()(cc: ControllerComponents)
     operators,
     initialCtx
   )
-  val gs = GameServer(List(s1,s2))
+  val gs = GameServer(List(s1, s2))
   val gameId = gs.startGame(0)
   val p1 = gs.getGame(gameId)
+
+  def mapToJSON(m: Map[String, Any]): String = {
+    val result = (for {
+      (k, v) <- m
+      val str = v match {
+        case x: Int => s""" "${k}": ${x}"""
+        case x      => s""" "${k}": "${x}" """
+      }
+    } yield str)
+    // println(result.mkString(","))
+    "{\n" + result.mkString(", ") + "\n}"
+  }
 
   /**
     * Create an Action to render an HTML page.
@@ -40,61 +52,88 @@ class HomeController @Inject()(cc: ControllerComponents)
     */
   def index() = Action { implicit request: Request[AnyContent] =>
     {
+      println(mapToJSON(initialCtx))
+      println(mapToJSON(Map("id" -> 12, "name" -> "Jan")))
       println("REQUEST:", request)
-      val scenarios=gs.getScenarios()
-      val playthroughs=gs.getStartedGames()
+      val scenarios = gs.getScenarios()
+      val playthroughs = gs.getStartedGames()
       // println(p1)
-      Ok(views.html.index(scenarios,playthroughs))
+      Ok(views.html.index(scenarios, playthroughs))
     }
   }
   def startGame(scenario_id: String) = Action {
     implicit request: Request[AnyContent] =>
       {
         println("SID", scenario_id)
-        val gameId=gs.startGame(scenario_id.toInt)
-        Ok("GameId"+gameId)
+        val gameId = gs.startGame(scenario_id.toInt)
+        Ok("GameId" + gameId)
       }
 
   }
-  def show(gameId: String) = Action {
-    implicit request: Request[AnyContent] =>
-      {
-        val playthrough=gs.getGame(gameId.toInt)
-        Ok("Game"+playthrough.show())
-      }
+  def show(gameId: String) = Action { implicit request: Request[AnyContent] =>
+    {
+      val playthrough = gs.getGame(gameId.toInt)
+      Ok("Game" + playthrough.show())
+    }
 
   }
-  def playOption(gameId: String,option:String)=Action {
+  def playOption(gameId: String, option: String) = Action {
     implicit request: Request[AnyContent] =>
       {
-        val playthrough=gs.getGame(gameId.toInt)
+        val playthrough = gs.getGame(gameId.toInt)
         playthrough.play(option.toInt)
-        Ok("Game"+playthrough.show())
+        Ok("Game" + playthrough.show())
+      }
+  }
+
+  def APIstartGame(scenario_id: String) = Action {
+    implicit request: Request[AnyContent] =>
+      {
+        println("SID", scenario_id)
+        val gameId = gs.startGame(scenario_id.toInt)
+        Ok("GameId" + gameId)
+      }
+
+  }
+  def APIshow(gameId: String) = Action {
+    implicit request: Request[AnyContent] =>
+      {
+        val playthrough = gs.getGame(gameId.toInt)
+        Ok("Game" + playthrough.show())
+      }
+
+  }
+  def APIplayOption(gameId: String, option: String) = Action {
+    implicit request: Request[AnyContent] =>
+      {
+        val playthrough = gs.getGame(gameId.toInt)
+        playthrough.play(option.toInt)
+        Ok("Game" + playthrough.show())
       }
   }
 
   def game_show(gameId: String) = Action {
     implicit request: Request[AnyContent] =>
       {
-        val playthrough=gs.getGame(gameId.toInt)
-        Ok(views.html.game(playthrough.show(),gameId))
+        val playthrough = gs.getGame(gameId.toInt)
+        Ok(views.html.game(playthrough.show(), gameId))
       }
 
   }
-  def game_option(gameId: String,option:String) = Action {
+  def game_option(gameId: String, option: String) = Action {
     implicit request: Request[AnyContent] =>
       {
-        val playthrough=gs.getGame(gameId.toInt)
+        val playthrough = gs.getGame(gameId.toInt)
         playthrough.play(option.toInt)
-        Ok(views.html.game(playthrough.show(),gameId))
+        Ok(views.html.game(playthrough.show(), gameId))
       }
   }
-  def game(scenario_id: String)= Action {
+  def game(scenario_id: String) = Action {
     implicit request: Request[AnyContent] =>
       {
-        val gameId=gs.startGame(scenario_id.toInt)
-        val playthrough=gs.getGame(gameId)
-        Ok(views.html.game(playthrough.show(),gameId+""))
+        val gameId = gs.startGame(scenario_id.toInt)
+        val playthrough = gs.getGame(gameId)
+        Ok(views.html.game(playthrough.show(), gameId + ""))
       }
   }
 }
