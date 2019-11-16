@@ -13,7 +13,7 @@ import site.jans.game._
 @Singleton
 class HomeController @Inject()(cc: ControllerComponents)
     extends AbstractController(cc) {
-  val operators = MathOperators.operators ++ LogicOperators.operators ++ BasicOperators.operators
+  val operators = Screept.getCoreOperators()
   val initialCtx = Map("dialog" -> "start", "turn" -> "1")
   val s1 = Scenario(
     "pierwszy scenariusz",
@@ -21,7 +21,13 @@ class HomeController @Inject()(cc: ControllerComponents)
     operators,
     initialCtx
   )
-  val gs = GameServer(List(s1))
+  val s2 = Scenario(
+    "London Life",
+    Scenario.readScenarioFile("scen2.txt"),
+    operators,
+    initialCtx
+  )
+  val gs = GameServer(List(s1,s2))
   val gameId = gs.startGame(0)
   val p1 = gs.getGame(gameId)
 
@@ -35,8 +41,9 @@ class HomeController @Inject()(cc: ControllerComponents)
   def index() = Action { implicit request: Request[AnyContent] =>
     {
       println("REQUEST:", request)
+      val scenarios=gs.getScenarios()
       // println(p1)
-      Ok(views.html.index())
+      Ok(views.html.index(scenarios))
     }
   }
   def startGame(scenario_id: String) = Action {
@@ -81,10 +88,10 @@ class HomeController @Inject()(cc: ControllerComponents)
         Ok(views.html.game(playthrough.show(),gameId))
       }
   }
-  def game()= Action {
+  def game(scenario_id: String)= Action {
     implicit request: Request[AnyContent] =>
       {
-        val gameId=gs.startGame(0)
+        val gameId=gs.startGame(scenario_id.toInt)
         val playthrough=gs.getGame(gameId)
         Ok(views.html.game(playthrough.show(),gameId+""))
       }
