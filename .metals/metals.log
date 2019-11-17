@@ -109,3 +109,8 @@ java.lang.NullPointerException
 	at scala.meta.internal.pc.HoverProvider.hover(HoverProvider.scala:42)
 
 WARN  no build target: /home/criamon/git/scala-play-playing/app/controllers/HomeController.scala
+INFO  time: initialize in 2.7s
+INFO  skipping build import with status 'Requested'
+WARN  no build target: /home/criamon/git/scala-play-playing/app/controllers/HomeController.scala
+INFO  no build target: using presentation compiler with only scala-library
+WARN  no build target: /home/criamon/git/scala-play-playing/app/controllers/HomeController.scala

@@ -40,7 +40,13 @@ class HomeController @Inject()(cc: ControllerComponents)
     operators,
     initialCtx
   )
-  val gs = GameServer(List(s1, s2))
+  val s3 = Scenario(
+    "Journey Under the Sea",
+    Scenario.readScenarioFile("scen3.txt"),
+    operators,
+    initialCtx
+  )
+  val gs = GameServer(List(s1, s2,s3))
   val gameId = gs.startGame(0)
   val p1 = gs.getGame(gameId)
 
