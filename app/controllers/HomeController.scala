@@ -35,7 +35,7 @@ class HomeController @Inject()(cc: ControllerComponents)
     initialCtx
   )
   val s2 = Scenario(
-    "London Life",
+    "TEST - London Life",
     Scenario.readScenarioFile("scen2.txt"),
     operators,
     initialCtx
@@ -46,7 +46,7 @@ class HomeController @Inject()(cc: ControllerComponents)
     operators,
     initialCtx
   )
-  val gs = GameServer(List(s1, s2,s3))
+  val gs = GameServer(List(s2,s3))
   val gameId = gs.startGame(0)
   val p1 = gs.getGame(gameId)
 

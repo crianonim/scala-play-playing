@@ -1,14 +1,15 @@
 @(show:(String,String,Vector[String]),gameId:String)
 
 @main("Welcome to Play") {
-    <h6><a href="/">Home</a></h6>
-  <h1>Game</h1>
-    <h2>@show._1</h2>
-  <h2>@show._2</h2>
-  <h3>Choose:</h3>
-  <ul>
-    @for((option,id) <- show._3.zipWithIndex) {
-        <li><a href=@("/game_option?game="+(gameId)+"&option="+(id+1))>@option</a></li>
-      }
-  </ul>
-}
+  <div class="game">
+    <h6><a class="button" href="/">Home</a></h6>
+    <!-- <h1>Game</!--> 
+      <!-- <h2>@show._1</h2> -->
+      <p class="game_intro">@show._2</p>
+      <p class="choose">You...</p>
+      <ul>
+        @for((option,id) <- show._3.zipWithIndex) { <li class="option"><a
+          href=@("/game_option?game="+(gameId)+"&option="+(id+1))>@option </a> </li> } 
+        </ul>
+      </div>
+ }
