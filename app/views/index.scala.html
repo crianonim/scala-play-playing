@@ -5,13 +5,13 @@
   <h2>Start a new game with one of the scenarios:</h2>
   <ul>
     @for( (id,title)<-scenarios){
-      <li><a href=@("/game?scenario="+id)>@id</a> <span>@title</span></li>
+      <li class="button" ><a href=@("/game?scenario="+id)> <span>@title</span></a></li>
     }
   </ul>
   <h2>Continue started game:</h2>
   <ul>
     @for( (id,title)<-games){
-      <li><a href=@("/game_show?game="+id)>@id</a> <span>@title</span></li>
+      <li class="button"><a  href=@("/game_show?game="+id)>@id <span> @title</span></a> </li>
     }
   </ul>
 }
